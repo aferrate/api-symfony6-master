@@ -2,7 +2,7 @@
 
 namespace App\Application\Query\GetUserFromEmail;
 
-use App\Domain\Cache\CacheInterface;
+use App\Domain\Factory\CacheFactoryInterface;
 use App\Domain\Factory\UserRepoFactoryInterface;
 use App\Domain\Query\QueryHandlerInterface;
 
@@ -11,10 +11,10 @@ class GetUserFromEmailQueryHandler implements QueryHandlerInterface
     private $userReadRepo;
     private $cacheClient;
 
-    public function __construct(UserRepoFactoryInterface $userRepoFactory, CacheInterface $cacheClient)
+    public function __construct(UserRepoFactoryInterface $userRepoFactory, CacheFactoryInterface $cacheFactory)
     {
         $this->userReadRepo = $userRepoFactory->getUserReadRepo();
-        $this->cacheClient = $cacheClient;
+        $this->cacheClient = $cacheFactory->getCache();
     }
 
     public function __invoke(GetUserFromEmailQuery $qetUserFromEmailQuery): array

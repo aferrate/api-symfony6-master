@@ -2,7 +2,7 @@
 
 namespace App\Application\Command\CreateUser;
 
-use App\Domain\Cache\CacheInterface;
+use App\Domain\Factory\CacheFactoryInterface;
 use App\Domain\Command\CommandHandlerInterface;
 use App\Domain\Factory\UserRepoFactoryInterface;
 
@@ -12,11 +12,11 @@ class CreateUserCommandHandler implements CommandHandlerInterface
     private $userWriteRepo;
     private $cacheClient;
 
-    public function __construct(UserRepoFactoryInterface $userRepoFactory, CacheInterface $cacheClient)
+    public function __construct(UserRepoFactoryInterface $userRepoFactory, CacheFactoryInterface $cacheFactory)
     {
         $this->userReadRepo = $userRepoFactory->getUserReadRepo();
         $this->userWriteRepo = $userRepoFactory->getUserWriteRepo();
-        $this->cacheClient = $cacheClient;
+        $this->cacheClient = $cacheFactory->getCache();
     }
 
     public function __invoke(CreateUserCommand $createUserCommand): array

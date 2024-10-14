@@ -4,10 +4,11 @@ namespace App\MessageHandler;
 
 use App\Message\SendEmail;
 use App\Domain\Factory\UserRepoFactoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use App\Domain\Mail\SendMailInterface;
 
-class SendEmailHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+class SendEmailHandler
 {
     private $userReadRepo;
     private $mailer;

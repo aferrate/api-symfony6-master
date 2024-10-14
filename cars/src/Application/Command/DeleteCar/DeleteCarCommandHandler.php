@@ -2,7 +2,7 @@
 
 namespace App\Application\Command\DeleteCar;
 
-use App\Domain\Cache\CacheInterface;
+use App\Domain\Factory\CacheFactoryInterface;
 use App\Domain\Command\CommandHandlerInterface;
 use App\Domain\Factory\CarRepoFactoryInterface;
 
@@ -12,11 +12,11 @@ class DeleteCarCommandHandler implements CommandHandlerInterface
     private $carWriteRepo;
     private $cacheClient;
 
-    public function __construct(CarRepoFactoryInterface $carRepoFactory, CacheInterface $cacheClient)
+    public function __construct(CarRepoFactoryInterface $carRepoFactory, CacheFactoryInterface $cacheFactory)
     {
         $this->carReadRepo = $carRepoFactory->getCarReadRepo();
         $this->carWriteRepo = $carRepoFactory->getCarWriteRepo();
-        $this->cacheClient = $cacheClient;
+        $this->cacheClient = $cacheFactory->getCache();
     }
 
     public function __invoke(DeleteCarCommand $deleteCarCommand): array

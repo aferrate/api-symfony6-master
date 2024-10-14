@@ -40,6 +40,9 @@ services:
     App\Domain\Repository\UserRepositoryInterface $userRepoBackup: '@App\Elasticsearch\Repository\UserRepository'
     App\Domain\Repository\UserRepositoryInterface: '@App\Doctrine\Repository\UserRepository'
 
+    App\Domain\Cache\CacheInterface $cacheRedis: '@App\Services\CacheRedis'
+    App\Domain\Cache\CacheInterface $cacheLogger: '@App\Services\CacheDecoratorLog'
+
     _instanceof:
         App\Domain\Command\CommandHandlerInterface:
             tags:

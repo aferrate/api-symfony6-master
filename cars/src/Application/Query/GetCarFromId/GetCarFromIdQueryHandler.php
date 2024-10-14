@@ -2,7 +2,7 @@
 
 namespace App\Application\Query\GetCarFromId;
 
-use App\Domain\Cache\CacheInterface;
+use App\Domain\Factory\CacheFactoryInterface;
 use App\Domain\Factory\CarRepoFactoryInterface;
 use App\Domain\Query\QueryHandlerInterface;
 
@@ -11,10 +11,10 @@ class GetCarFromIdQueryHandler implements QueryHandlerInterface
     private $carReadRepo;
     private $cacheClient;
 
-    public function __construct(CarRepoFactoryInterface $carRepoFactory, CacheInterface $cacheClient)
+    public function __construct(CarRepoFactoryInterface $carRepoFactory, CacheFactoryInterface $cacheFactory)
     {
         $this->carReadRepo = $carRepoFactory->getCarReadRepo();
-        $this->cacheClient = $cacheClient;
+        $this->cacheClient = $cacheFactory->getCache();
     }
 
     public function __invoke(GetCarFromIdQuery $getCarFromIdQuery): array
